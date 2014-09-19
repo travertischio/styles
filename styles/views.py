@@ -64,7 +64,7 @@ def list(request):
 
 def countrys(request):
 	beer_list = BeerStyle.objects.order_by('country')
-	country = "Czech Republic"
+	country = "Belgium"
 	country_list = [country]
 	for beer in beer_list:
 		if beer.country != country:

@@ -5,11 +5,11 @@
 	{% if this_beer %}
 		{% for beer in this_beer %}
 			<h1>{{ beer.name }}</h1>
-			<p>IBU:&nbsp;{{ beer.ibu }}</p>
-			<p>SRM:&nbsp;{{ beer.srm }}</p>
-			<p>ABV:&nbsp;{{ beer.abv }}%</p>
-			<p>Country of Origin:&nbsp;{{ beer.country }}</p>
-			<p>Brands to try for this style:&nbsp;{{ beer.brands }}</p>
+			<p>IBU:  {{ beer.ibu }}</p>
+			<p>SRM:  {{ beer.srm }}</p>
+			<p>ABV:  {{ beer.abv }}%</p>
+			<p>Country of Origin:  {{ beer.country }}</p>
+			<p>Brands to try for this style:  {{ beer.brands }}</p>
 		{% endfor %}
 	{% else %}
 		<p>No Beers Listed</p>
