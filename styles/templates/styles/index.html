@@ -1,67 +1,53 @@
-{% load staticfiles %}
+<body>
+	{% include "styles/header.html" %}
+	<div class="input-boxes">
+		<h2>Need a beer? Want to try something new?</h2>
+		<h4>Enter your preferences below to have beer styles matched to your taste.</h4>
 
-<link rel="stylesheet" type="text/css" href="{% static 'styles/stylesheet.css' %}" />
-<body class="index">
-<header>Find Your Beer</header>
-<h2>Need a beer? Want to try something new?</h2>
-<h4>Enter your preferences below to have beer styles matched to your taste.</h4>
+		<div class="form-group">
+			<form action="/styles/results/" method="post">
+			{% csrf_token %}
+		
+			<div class="box">
+				<h3>IBU</h3>
+				<h5>International Bitterness Units measure how much Hop Bitterness there is in 	your beer.</h5>
+				<p class="description">Range 1 - 80 (1 is the least bitter)</p>
+				<div>
+					<input type="number" name="ibu" min="1" max="80" step="1" required>
+				</div>
+			</div>
 
-<div class="form-group">
-	<form action="/styles/results/" method="post">
-	{% csrf_token %}
-	
-	<div class="box">
-		<h3>IBU</h3>
-		<h5>International Bitterness Units measure how much Hop Bitterness there is in your beer.</h5>
-		<h5>Range 1 - 80 (1 is the least bitter)</h5>
-		<div>
-			<input type="number" name="ibu" min="1" max="80" step="1" required>
+			<div class="box">
+				<h3>SRM</h3>
+				<h5>Standard Reference Method describes the darkness of your beer, this often 		relates tothe body.</h5>	
+				<p class="description">Range 1 - 40 (1 - Pilsener, 40 - Stout)</p>
+				<div>
+					<input type="number" name="srm" min="1" max="40" step="1" required>
+				</div>
+			</div>
+
+			<div class="box">
+				<h3>ABV</h3>
+				<h5>Alcohol By Volume</h5>
+				<p class="description">Range 0.00% - 30.00%</p>
+				<div>
+					<input type="number" name="abv" min="0" max="30" step=".01" required>
+				</div>
+			</div>
+
+			<div class="box">
+				<h3>Country</h3>
+				<h5>The beer's country of origin often defines which yeast is used and therefore 	drastically changes the body and esters.</h5>
+
+				<select class="dropdown" id="select" name="country" required>
+					<option value=1>Belgium / France</option>
+					<option value=2>Germany / Czech Republic</option>
+					<option value=3>United Kingdom and Ireland</option>
+					<option value=4>United States</option>
+				</select>
+			</div>
+
+			<button class="btn" type="submit" id="submit">Find Me A Beer</button>
 		</div>
 	</div>
-
-	<div class="box">
-		<h3>SRM</h3>
-		<h5>Standard Reference Method describes the darkness of your beer, this often relates to the body.</h5>
-		<h5>Range 1 - 40 (1 - Pilsener, 40 - Stout)</h5>
-		<div>
-			<input type="number" name="srm" min="1" max="40" step="1" required>
-		</div>
-	</div>
-
-	<div class="box">
-		<h3>ABV</h3>
-		<h5>Alcohol By Volume</h5>
-		<h5>Range 0.00% - 30.00%</h5>
-		<div>
-			<input type="number" name="abv" min="0" max="30" step=".01" required>
-		</div>
-	</div>
-
-	<div class="box">
-		<h3>Country</h3>
-		<h5>The beer's country of origin often defines which yeast is used and therefore drastically changes the body and esters.</h5>
-
-		<select class="dropdown" id="select" name="country" required>
-			<option value="Belgium">Belgium</option>
-			<option value="Czech Republic">Czech Republic</option>
-			<option value="England">England</option>
-			<option value="Germany">Germany</option>
-			<option value="United_States">United States</option>
-		</select>
-	</div>
-	<br>
-	<br>
-	<button class="btn" type="submit" id="submit">Find Me A Beer</button>
-</div>
-<br>
-<br>
-<br>
-<br>
-<footer>
-<div class"nav-bar">
-	<a href="{% url 'index' %}">Home</a>
-	<a href="{% url 'countrys' %}">List of Countries</a>
-	<a href="{% url 'list' %}">List of Beers By Name</a>
-</div>
-</footer>
 </body>

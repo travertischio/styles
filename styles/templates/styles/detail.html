@@ -1,28 +1,17 @@
-{% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'styles/stylesheet.css' %}" />
-
-<body class="results">
-	{% if this_beer %}
-		{% for beer in this_beer %}
-			<h1>{{ beer.name }}</h1>
-			<p>IBU:  {{ beer.ibu }}</p>
-			<p>SRM:  {{ beer.srm }}</p>
-			<p>ABV:  {{ beer.abv }}%</p>
-			<p>Country of Origin:  {{ beer.country }}</p>
-			<p>Brands to try for this style:  {{ beer.brands }}</p>
-		{% endfor %}
-	{% else %}
-		<p>No Beers Listed</p>
-	{% endif %}
-	<br>
-<br>
-<br>
-<br>
-<footer>
-<div class"nav-bar">
-	<a href="{% url 'index' %}">Home</a>
-	<a href="{% url 'countrys' %}">List of Countries</a>
-	<a href="{% url 'list' %}">List of Beers By Name</a>
-</div>
-</footer>
+<body>
+	{% include "styles/header.html" %}
+	<div class="results">
+		{% if this_beer %}
+			{% for beer in this_beer %}
+				<h1>{{ beer.name }}</h1>
+				<p>IBU:  {{ beer.ibu }}</p>
+				<p>SRM:  {{ beer.srm }}</p>
+				<p>ABV:  {{ beer.abv }}%</p>
+				<p>Country of Origin:  {{ beer.country }}</p>
+				<p>Brands to try for this style:  {{ beer.brands }}</p>
+			{% endfor %}
+		{% else %}
+			<p>No Beers Listed</p>
+		{% endif %}
+	</div>
 </body>

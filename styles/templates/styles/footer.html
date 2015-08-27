@@ -1,0 +1,11 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'styles/stylesheet.css' %}" />
+
+<footer>
+	<div class="nav">
+		<a href="{% url 'index' %}">Home</a>
+		<a href="{% url 'countrys' %}">Countries of Origin</a>
+		<a href="{% url 'list' %}">Styles By Name</a>
+	</div>
+</footer>

@@ -1,28 +1,18 @@
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-{% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'styles/stylesheet.css' %}" />
 
-<body class="results">
-	<h1>The Countries of Beer:</h1>
-	<h4>Click a country to see their beer</h4>
-	{% if country_list %}
-	<ul>
-		{% for country in country_list %}
-			<li class="link link-results"><a href="{% url 'bycountry' country %}">{{ country }}</a></li>
-		{% endfor %}
-	</ul>
-	{% else %}
-	<p>No Countries Listed</p>
-	{% endif %}
-	<br>
-<br>
-<br>
-<br>
-<footer>
-<div class"nav-bar">
-	<a href="{% url 'index' %}">Home</a>
-	<a href="{% url 'countrys' %}">List of Countries</a>
-	<a href="{% url 'list' %}">List of Beers By Name</a>
-</div>
-</footer>
+<body>
+	{% include "styles/header.html" %}
+	<div class="results">
+		<h1>The Countries of Beer:</h1>
+		<h4>Click a country to see their beer</h4>
+		{% if country_list %}
+		<ul>
+			{% for country in country_list %}
+				<li class="link link-results"><a href="{% url 'bycountry' country %}">{{ country }}</a></li>
+			{% endfor %}
+		</ul>
+		{% else %}
+		<p>No Countries Listed</p>
+		{% endif %}
+	</div>
 </body>

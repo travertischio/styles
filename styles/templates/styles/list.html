@@ -1,28 +1,18 @@
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-{% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'styles/stylesheet.css' %}" />
 
-<body class="results">
-	<h1>Beer Styles Listed By Name:</h1>
-	<h4>Click a style for more information</h4>
-	{% if beer_list %}
-	<ul>
-		{% for beer in beer_list %}
-		<li class="link link-results"><a href="{% url 'detail' beer.name %}">{{ beer.name }}</a></li>
-		{% endfor %}
-	</ul>
-	{% else %}
-	<p>No Beers Listed</p>
-	{% endif %}
-	<br>
-<br>
-<br>
-<br>
-<footer>
-<div class"nav-bar">
-	<a href="{% url 'index' %}">Home</a>
-	<a href="{% url 'countrys' %}">List of Countries</a>
-	<a href="{% url 'list' %}">List of Beers By Name</a>
-</div>
-</footer>
+<body>
+	{% include "styles/header.html" %}
+	<div class="results">
+		<h1>Beer Styles Listed By Name:</h1>
+		<h4>Click a style for more information</h4>
+		{% if beer_list %}
+		<ul>
+			{% for beer in beer_list %}
+			<li class="link link-results"><a href="{% url 'detail' beer.name %}">{{ beer.name }}</a></li>
+			{% endfor %}
+		</ul>
+		{% else %}
+		<p>No Beers Listed</p>
+		{% endif %}
+	</div>
 </body>

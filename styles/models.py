@@ -14,8 +14,18 @@ class BeerStyle(models.Model):
 
 	def comparison(self, ibus, srms, abvs, countrys):
 		difference = abs(ibus-self.ibu) + abs(srms-self.srm) + abs(abvs-self.abv)
-		if countrys != self.country:
-			difference += 5
+		if countrys == 1:
+			if self.country != ("Belgium" or "France"):
+				difference += 10
+		elif countrys == 2:
+			if self.country != ("Germany" or "Czech Republic"):
+				difference += 10
+		elif countrys == 3:
+			if self.country != ("England" or "Scotland" or "Ireland"):
+				difference += 10
+		else:
+			if self.country != ("United States"):
+				difference += 10
 		self.similarity = difference
 		self.save()
 		return
