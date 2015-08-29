@@ -30,29 +30,28 @@ def detail(request, name):
 
 def results(request):
   if request.method == 'POST':
-		form = BeerForm(request.POST)
-		if form.is_valid():
-			ibu = form.cleaned_data['ibu']
-			srm = form.cleaned_data['srm']
-			abv = form.cleaned_data['abv']
-			country = form.cleaned_data['country']
+	  form = BeerForm(request.POST)
+	  if form.is_valid():
+	  	ibu = form.cleaned_data['ibu']
+	  	srm = form.cleaned_data['srm']
+	  	abv = form.cleaned_data['abv']
+	  	country = form.cleaned_data['country']
+	  	for beer in BeerStyle.objects.all():
+	  		beer.comparison(ibu, srm, abv, country)
 
-			for beer in BeerStyle.objects.all():
-				beer.comparison(ibu, srm, abv, country)
+	  list_beers = BeerStyle.objects.order_by('similarity')[:10]
+	  template = loader.get_template('styles/results.html')
+	  context = RequestContext(request, {
+	  	'list_beers': list_beers,
+	  	'form': form,
+	  })
+	  if list_beers:
+	  	return HttpResponse(template.render(context))
+	  else:
+	  	raise Http404
 
-		list_beers = BeerStyle.objects.order_by('similarity')[:10]
-		template = loader.get_template('styles/results.html')
-		context = RequestContext(request, {
-			'list_beers': list_beers,
-			'form': form,
-		})
-		if list_beers:
-			return HttpResponse(template.render(context))
-		else:
-			raise Http404
-
-	else:
-		HttpResponseRedirect('styles:index')
+  else:
+    HttpResponseRedirect('styles:index')
 
 
 def list(request):
