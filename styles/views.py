@@ -6,37 +6,40 @@ from django.template import RequestContext, loader
 from styles.models import BeerStyle
 from styles.forms import BeerForm
 
+
 def index(request):
-	form = BeerForm()
-	template = loader.get_template('styles/index.html')
-	context = RequestContext(request, {
-		'form': form,
-	})
-	return HttpResponse(template.render(context))
+  form = BeerForm()
+  template = loader.get_template('styles/index.html')
+  context = RequestContext(request, {
+  	'form': form,
+  })
+  return HttpResponse(template.render(context))
+
 
 def detail(request, name):
-	this_beer = BeerStyle.objects.filter(name=name)[:1]
-	template = loader.get_template('styles/detail.html')
-	context = RequestContext(request, {
-		'this_beer': this_beer,
-	})
-	if this_beer:
-		return HttpResponse(template.render(context))
-	else:
-		raise Http404
+  this_beer = BeerStyle.objects.filter(name=name)[:1]
+  template = loader.get_template('styles/detail.html')
+  context = RequestContext(request, {
+  	'this_beer': this_beer,
+  })
+  if this_beer:
+  	return HttpResponse(template.render(context))
+  else:
+  	raise Http404
+
 
 def results(request):
-	if request.method == 'POST':
+  if request.method == 'POST':
 		form = BeerForm(request.POST)
 		if form.is_valid():
 			ibu = form.cleaned_data['ibu']
 			srm = form.cleaned_data['srm']
 			abv = form.cleaned_data['abv']
 			country = form.cleaned_data['country']
-			
+
 			for beer in BeerStyle.objects.all():
 				beer.comparison(ibu, srm, abv, country)
-				
+
 		list_beers = BeerStyle.objects.order_by('similarity')[:10]
 		template = loader.get_template('styles/results.html')
 		context = RequestContext(request, {
@@ -51,6 +54,7 @@ def results(request):
 	else:
 		HttpResponseRedirect('styles:index')
 
+
 def list(request):
 	beer_list = BeerStyle.objects.order_by('name')
 	template = loader.get_template('styles/list.html')
@@ -61,6 +65,7 @@ def list(request):
 		return HttpResponse(template.render(context))
 	else:
 		raise Http404
+
 
 def countrys(request):
 	beer_list = BeerStyle.objects.order_by('country')
@@ -78,6 +83,7 @@ def countrys(request):
 		return HttpResponse(template.render(context))
 	else:
 		raise Http404
+
 
 def bycountry(request, name):
 	beer_list = BeerStyle.objects.filter(country=name)
