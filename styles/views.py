@@ -79,7 +79,7 @@ def countrys(request):
     if beer_list:
         return HttpResponse(template.render(context))
     else:
-        raise Http404
+        HttpResponseRedirect('styles:index')
 
 
 def bycountry(request, name):
